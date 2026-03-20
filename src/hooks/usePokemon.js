@@ -10,7 +10,8 @@ export function usePokemon() {
   useEffect(() => {
     const fetchPokemons = async () => {
       try {
-        const cached = localStorage.getItem('pokemons') 
+
+        const cached = localStorage.getItem('pokemons')
         if (cached) {
           setPokemons(JSON.parse(cached))
           setLoading(false)
@@ -49,4 +50,5 @@ export function usePokemon() {
 
 
   return { pokemons: filtered, loading, error, search, setSearch }
+
 }
