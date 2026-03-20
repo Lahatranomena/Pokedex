@@ -1,10 +1,10 @@
 import { usePokemon } from './hooks/usePokemon'
-
 import PokemonCard from './components/PokemonCard'
+import SearchBar from './components/SearchBar'
 
 export default function App() {
 
-  const { pokemons, loading, error } = usePokemon()
+  const { pokemons, loading, error, search, setSearch } = usePokemon()
 
   if (loading) {
     return (
@@ -36,12 +36,12 @@ export default function App() {
         Pokédex
       </h1>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-10">
+      <SearchBar search={search} setSearch={setSearch} />
 
+      <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-10">
         {pokemons.map(pokemon => (
           <PokemonCard key={pokemon.id} pokemon={pokemon} />
         ))}
-
       </div>
 
     </div>
