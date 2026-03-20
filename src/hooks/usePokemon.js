@@ -5,7 +5,8 @@ export function usePokemon() {
   const [pokemons, setPokemons] = useState([])  
   const [loading, setLoading] = useState(true)  
   const [error, setError] = useState(null)     
-  const [search, setSearch] = useState('')     
+  const [search, setSearch] = useState('')  
+  const [selectedTypes, setSelectedTypes] = useState([])
 
   useEffect(() => {
     const fetchPokemons = async () => {
@@ -44,11 +45,32 @@ export function usePokemon() {
     fetchPokemons()
   }, [])
 
-  const filtered = pokemons.filter(p =>
-    p.name.toLowerCase().includes(search.toLowerCase())
-  )
+  const allTypes = [...new Set(pokemons.flatMap(p => p.types))].sort()
+  const toggleType = (type) => {
+    setSelectedTypes(prev =>
+      prev.includes(type)
+        ? prev.filter(t => t !== type)
+        : [...prev, type]              
+    )
+  }
 
+  const filtered = pokemons
+    .filter(p => p.name.toLowerCase().includes(search.toLowerCase()))
+    .filter(p =>
+      selectedTypes.length === 0 
+        ? true
+        : selectedTypes.every(t => p.types.includes(t))
+    )
 
-  return { pokemons: filtered, loading, error, search, setSearch }
+  return {
+    pokemons: filtered,   
+    loading,
+    error,
+    search,
+    setSearch,
+    allTypes,             
+    selectedTypes,        
+    toggleType,           
+  }
 
 }
