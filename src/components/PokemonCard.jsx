@@ -1,9 +1,10 @@
-export default function PokemonCard({ pokemon }) { 
+export default function PokemonCard({ pokemon, onClick }) { 
   return (
     <div style={{
            backgroundColor: 'var(--color-card)',      
            border: '1px solid var(--color-accent)'    
          }}
+         onClick={onClick}
          className="rounded-2xl p-4 text-center cursor-pointer transition hover:scale-105">
 
       <p style={{ color: 'var(--color-muted)' }}
