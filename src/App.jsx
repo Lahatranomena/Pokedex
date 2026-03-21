@@ -1,5 +1,5 @@
-import { usePokemon } from './hooks/usePokemon'
 import { useState } from 'react'
+import { usePokemon } from './hooks/usePokemon'
 import PokemonCard from './components/PokemonCard'
 import SearchBar from './components/SearchBar'
 import TypeFilter from './components/TypeFilter'
@@ -11,7 +11,7 @@ export default function App() {
   const [selectedPokemon, setSelectedPokemon] = useState(null)
   const [toast, setToast] = useState(null)
 
-  const { pokemons, loading, error, search, setSearch, allTypes, selectedTypes, toggleType, updatePokemon, deletePokemon, } = usePokemon()
+  const { pokemons, loading, error, search, setSearch, allTypes, selectedTypes, toggleType, updatePokemon, deletePokemon } = usePokemon()
 
   if (loading) {
     return (
@@ -34,34 +34,62 @@ export default function App() {
   }
 
   return (
-    <div style={{ backgroundColor: 'var(--color-bg)' }}
-      className="min-h-screen p-10">
+    <div style={{ backgroundColor: 'var(--color-bg)' }} className="min-h-screen">
 
-      <h1 style={{ color: 'var(--color-title)' }}
-        className="text-3xl font-bold text-center mb-8">
-        Pokédex
-      </h1>
+      <div
+        style={{
+          background: 'linear-gradient(180deg, #1a0a2e 0%, #0D0D1A 100%)',
+          borderBottom: '1px solid rgba(124, 58, 237, 0.2)',
+        }}
+        className="py-4 px-10 relative overflow-hidden"
+      >
+        <div
+          style={{ background: 'radial-gradient(circle, #7C3AED22, transparent)' }}
+          className="absolute inset-0 pointer-events-none"
+        />
+        <div className="flex items-center justify-center gap-3">
+          <div
+            style={{
+              background: 'linear-gradient(135deg, #A78BFA, #7C3AED)',
+              boxShadow: '0 0 20px #7C3AED66',
+            }}
+            className="w-10 h-10 rounded-xl flex items-center justify-center"
+          >
+            <span className="text-xl">⚡</span>
+          </div>
+          <h1
+            style={{
+              background: 'linear-gradient(135deg, #A78BFA, #7C3AED, #E879F9)',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+              backgroundClip: 'text',
+            }}
+            className="text-3xl font-black tracking-tight"
+          >
+            Pokédex
+          </h1>
+        </div>
+      </div>
 
-      <SearchBar search={search} setSearch={setSearch} />
-
-      <TypeFilter
-        types={allTypes}
-        selectedTypes={selectedTypes}
-        toggleType={toggleType}
-      />
-
-      <p style={{ color: 'var(--color-muted)' }} className="text-sm mb-4">
-        {pokemons.length} Pokémon trouvé{pokemons.length !== 1 ? 's' : ''}
-      </p>
-
-      <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-10">
-        {pokemons.map(pokemon => (
-          <PokemonCard
-            key={pokemon.id}
-            pokemon={pokemon}
-            onClick={() => setSelectedPokemon(pokemon)}
-          />
-        ))}
+      <div className="px-12 py-8">
+        <SearchBar search={search} setSearch={setSearch} />
+        <TypeFilter
+          types={allTypes}
+          selectedTypes={selectedTypes}
+          toggleType={toggleType}
+        />
+        <p style={{ color: 'var(--color-muted)' }} className="text-sm mb-6">
+          {pokemons.length} Pokémon trouvé{pokemons.length !== 1 ? 's' : ''}
+        </p>
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-10">
+          {pokemons.map(pokemon => (
+            <PokemonCard
+              key={pokemon.id}
+              pokemon={pokemon}
+              onClick={() => setSelectedPokemon(pokemon)}
+            />
+          ))}
+        </div>
       </div>
 
       {selectedPokemon && (
@@ -69,14 +97,14 @@ export default function App() {
           pokemon={selectedPokemon}
           onClose={() => setSelectedPokemon(null)}
           onDelete={(id) => {
-            deletePokemon(id)                          
-            setSelectedPokemon(null)                   
-            setToast('🗑️ Pokémon supprimé !')         
+            deletePokemon(id)
+            setSelectedPokemon(null)
+            setToast('🗑️ Pokémon supprimé !')
           }}
           onUpdate={(updated) => {
-            updatePokemon(updated)                          
-            setSelectedPokemon(updated)                    
-            setToast('✅ Pokémon modifié avec succès !')   
+            updatePokemon(updated)
+            setSelectedPokemon(updated)
+            setToast('✅ Pokémon modifié avec succès !')
           }}
         />
       )}
@@ -84,9 +112,10 @@ export default function App() {
       {toast && (
         <Toast
           message={toast}
-          onClose={() => setToast(null)} 
+          onClose={() => setToast(null)}
         />
       )}
+
     </div>
   )
 }
