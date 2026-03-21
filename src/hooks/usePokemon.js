@@ -19,7 +19,7 @@ export function usePokemon() {
           return
         }
 
-        const res = await fetch('https://pokeapi.co/api/v2/pokemon?limit=151')
+        const res = await fetch('https://pokeapi.co/api/v2/pokemon?limit=150')
         const data = await res.json()
 
         const details = await Promise.all(
@@ -46,20 +46,35 @@ export function usePokemon() {
   }, [])
 
   const allTypes = [...new Set(pokemons.flatMap(p => p.types))].sort()
+
   const toggleType = (type) => {
     setSelectedTypes(prev =>
       prev.includes(type)
-        ? prev.filter(t => t !== type)
-        : [...prev, type]              
+        ? prev.filter(t => t !== type) 
+        : [...prev, type]             
     )
   }
 
+  const updatePokemon = (updatedPokemon) => {
+    const newList = pokemons.map(p =>
+      p.id === updatedPokemon.id ? updatedPokemon : p
+    )
+    setPokemons(newList)                                        
+    localStorage.setItem('pokemons', JSON.stringify(newList))  
+  }
+
+  const deletePokemon = (id) => {
+    const newList = pokemons.filter(p => p.id !== id)
+    setPokemons(newList)                                        
+    localStorage.setItem('pokemons', JSON.stringify(newList))  
+  }
+
   const filtered = pokemons
-    .filter(p => p.name.toLowerCase().includes(search.toLowerCase()))
+    .filter(p => p.name.toLowerCase().includes(search.toLowerCase())) 
     .filter(p =>
-      selectedTypes.length === 0 
-        ? true
-        : selectedTypes.every(t => p.types.includes(t))
+      selectedTypes.length === 0           
+              ? true
+        : selectedTypes.every(t => p.types.includes(t)) 
     )
 
   return {
@@ -68,9 +83,10 @@ export function usePokemon() {
     error,
     search,
     setSearch,
-    allTypes,             
-    selectedTypes,        
+    allTypes,            
+    selectedTypes,       
     toggleType,           
+    updatePokemon,     
+    deletePokemon,        
   }
-
 }
