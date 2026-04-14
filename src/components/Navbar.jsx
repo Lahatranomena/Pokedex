@@ -11,17 +11,15 @@ export default function Navbar({ search, setSearch }) {
             <div className="absolute -top-10 left-1/4 w-96 h-96 bg-purple-500/10 blur-3xl rounded-full animate-pulse" />
             <div className="absolute -bottom-10 right-1/4 w-96 h-96 bg-pink-500/10 blur-3xl rounded-full animate-pulse" />
 
-            <div className="relative flex items-center gap-6 max-w-6xl mx-auto">
+
+            <div className="relative flex items-center justify-between w-full px-0">
 
                 <div className="flex items-center gap-3 shrink-0">
-                    <img src="/favicon.svg" alt="logo" className="w-8 h-8" />
-
-                    <h1 className="text-2xl font-bold bg-gradient-to-r from-purple-300 via-purple-400 to-pink-400 bg-clip-text text-transparent">
-                        Pokédex
-                    </h1>
+                    <img src="/favicon.svg" className="w-8 h-8" />
+                    <h1 className="text-3xl font-bold bg-gradient-to-r from-purple-300 via-purple-400 to-pink-400 bg-clip-text text-transparent">Pokédex</h1>
                 </div>
 
-                <div className="flex-1 flex justify-center">
+                <div className="w-full max-w-md flex justify-end">
                     <SearchBar search={search} setSearch={setSearch} />
                 </div>
 

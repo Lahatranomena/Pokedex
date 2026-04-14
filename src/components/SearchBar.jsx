@@ -4,7 +4,7 @@ export default function SearchBar({ search, setSearch }) {
 
       <div className="absolute left-3 top-1/2 -translate-y-1/2 text-purple-400">
         <svg
-          className="w-4 h-4"
+          className="w-5 h-5"
           fill="none"
           stroke="currentColor"
           viewBox="0 0 24 24"
