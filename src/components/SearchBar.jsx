@@ -1,12 +1,11 @@
 export default function SearchBar({ search, setSearch }) {
-
   return (
-    <div className="relative mb-6">
+    <div className="relative w-full max-w-md">
 
-      <div className="absolute left-4 top-1/2 -translate-y-1/2 pointer-events-none">
+      {/* Icon */}
+      <div className="absolute left-3 top-1/2 -translate-y-1/2 text-purple-400">
         <svg
-          className="w-5 h-5"
-          style={{ color: 'var(--color-accent)' }}
+          className="w-4 h-4"
           fill="none"
           stroke="currentColor"
           viewBox="0 0 24 24"
@@ -20,30 +19,40 @@ export default function SearchBar({ search, setSearch }) {
         </svg>
       </div>
 
+      {/* Input */}
       <input
         type="text"
         value={search}
         onChange={e => setSearch(e.target.value)}
         placeholder="Rechercher un Pokémon..."
-        style={{
-          backgroundColor: 'rgba(124, 58, 237, 0.08)',
-          border: '1px solid rgba(124, 58, 237, 0.3)',
-          color: 'var(--color-text)',
-          backdropFilter: 'blur(10px)',
-        }}
-        className="w-full pl-12 pr-12 py-4 rounded-2xl outline-none text-sm transition-all duration-300 focus:border-purple-500"
+        className="
+          w-full
+          pl-10 pr-10 py-2.5
+          rounded-xl
+          bg-[#1f1b2e]
+          border border-purple-500/20
+          text-white placeholder:text-gray-400
+          text-sm
+          outline-none
+          transition
+          focus:border-purple-500
+          focus:ring-2 focus:ring-purple-500/30
+        "
       />
 
+      {/* Clear button */}
       {search && (
         <button
           onClick={() => setSearch('')}
-          style={{ color: 'var(--color-muted)' }}
-          className="absolute right-4 top-1/2 -translate-y-1/2 hover:text-white transition"
+          className="
+            absolute right-3 top-1/2 -translate-y-1/2
+            text-gray-400 hover:text-white
+            text-sm transition
+          "
         >
           ✕
         </button>
       )}
-
     </div>
   )
 }
