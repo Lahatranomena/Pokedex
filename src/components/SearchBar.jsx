@@ -2,7 +2,6 @@ export default function SearchBar({ search, setSearch }) {
   return (
     <div className="relative w-full max-w-md">
 
-      {/* Icon */}
       <div className="absolute left-3 top-1/2 -translate-y-1/2 text-purple-400">
         <svg
           className="w-4 h-4"
@@ -19,7 +18,6 @@ export default function SearchBar({ search, setSearch }) {
         </svg>
       </div>
 
-      {/* Input */}
       <input
         type="text"
         value={search}
@@ -40,7 +38,6 @@ export default function SearchBar({ search, setSearch }) {
         "
       />
 
-      {/* Clear button */}
       {search && (
         <button
           onClick={() => setSearch('')}

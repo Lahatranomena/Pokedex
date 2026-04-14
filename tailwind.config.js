@@ -17,5 +17,18 @@ export default {
       }
     },
   },
+  theme: {
+    extend: {
+      keyframes: {
+        slide: {
+          '0%': { transform: 'translateX(-50%)' },
+          '100%': { transform: 'translateX(50%)' },
+        },
+      },
+      animation: {
+        slide: 'slide 8s linear infinite',
+      },
+    },
+  },
   plugins: [],
 }
